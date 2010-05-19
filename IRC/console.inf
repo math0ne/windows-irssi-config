@@ -1,0 +1,51 @@
+;
+; "Console Here" - ripped from MS "Command Prompt Here" Powertoy
+;
+; Mostly Copyright 1996 Microsoft Corporation
+; Changes by Marko Bozikovic (bozho@kset.org)
+; for Console program (http://marvin.kset.org/~bozho)
+
+[version]
+signature="$CHICAGO$"
+
+[ConsoleHereInstall]
+CopyFiles = ConsoleHere.Files.Inf
+AddReg    = ConsoleHere.Reg
+
+[DefaultInstall]
+CopyFiles = ConsoleHere.Files.Inf
+AddReg    = ConsoleHere.Reg
+
+[DefaultUnInstall]
+DelFiles  = ConsoleHere.Files.Inf
+DelReg    = ConsoleHere.Reg
+
+[SourceDisksNames]
+55="Console Here","",1
+
+[SourceDisksFiles]
+console.inf=55
+
+[DestinationDirs]
+ConsoleHere.Files.Inf = 17
+
+[ConsoleHere.Files.Inf]
+console.inf
+
+[ConsoleHere.Reg]
+HKLM,SOFTWARE\Classes\Directory\shell\ConsoleHere
+HKLM,SOFTWARE\Classes\Drive\shell\ConsoleHere
+HKLM,%UDHERE%
+HKLM,%UDHERE%,DisplayName,,"%ConsoleHereName%"
+HKLM,%UDHERE%,UninstallString,,"%11%\rundll32.exe setupapi,InstallHinfSection DefaultUninstall 132 %17%\console.inf"
+HKCR,Directory\Shell\ConsoleHere\,,,"%ConsoleHereAccel%"
+HKCR,Directory\Shell\ConsoleHere\command,,,"%01%\console.exe -c ""/k cd /d """"%1"""""""
+HKCR,Drive\Shell\ConsoleHere,,,"%ConsoleHereAccel%"
+HKCR,Drive\Shell\ConsoleHere\command,,,"%01%\console.exe -c ""/k cd /d """"%1\"""""""
+
+
+[Strings]
+ConsoleHereName="Console Here Extension"
+ConsoleHereAccel="Co&nsole Here"
+UDHERE="Software\Microsoft\Windows\CurrentVersion\Uninstall\ConsoleHere"
+
